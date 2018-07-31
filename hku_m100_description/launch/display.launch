@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+	<arg name="model" />
+	<arg name="gui" default="True" />
+	<param name="hku_m100_description" textfile="$(arg model)" />
+	<param name="use_gui" value="$(arg gui)"/>
+	
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot1_description)/urdf.rviz" />
+	<!--<node name="rviz" pkg="rviz" type="rviz" args="-d $(find urdf_tutorial)/rviz/urdf.rviz" />-->
+</launch>

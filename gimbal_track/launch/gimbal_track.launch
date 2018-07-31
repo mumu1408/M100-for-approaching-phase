@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+ 
+<launch>
+
+    <node pkg="gimbal_track" type="gimbal_track_velocity_controller" name="gimbal_track_velocity_controller" output="screen">
+    </node>
+
+    <node ns="gimbal_track" name="gimbal_track_pid_pitch_controller" pkg="pid" type="controller" output="screen">
+      <param name="node_name" value="pitch_controller" />
+      <param name="Kp" value="6.5" />
+      <param name="Ki" value="0" />
+      <param name="Kd" value="0" />
+      <param name="P" value="1" />
+      <param name="Q" value="0.00001" />
+      <param name="R" value="0.1" />
+      <param name="upper_limit" value="180" />
+      <param name="lower_limit" value="-180" />
+      <param name="windup_limit" value="5" />
+      <param name="cutoff_frequency" value="20" />
+      <param name="diagnostic_period" value="0.25" />
+      <param name="max_loop_frequency" value="105.0" />
+      <param name="min_loop_frequency" value="95.0" />
+      <remap from="setpoint" to="/gimbal_track/setpoint_pitch" />
+      <param name="topic_from_plant" value="/gimbal_track/pitch_state" />
+      <param name="topic_from_controller" value="/gimbal_track/gimbal_control_effort_pitch" />
+     </node>
+
+    <node ns="gimbal_track" name="gimbal_track_pid_yaw_controller" pkg="pid" type="controller">
+      <param name="node_name" value="yaw_controller" />
+      <param name="Kp" value="6.5" />
+      <param name="Ki" value="0" />
+      <param name="Kd" value="0" />
+      <param name="P" value="1" />
+      <param name="Q" value="0.00001" />
+      <param name="R" value="0.1" />
+      <param name="upper_limit" value="180" />
+      <param name="lower_limit" value="-180" />
+      <param name="windup_limit" value="5" />
+      <param name="cutoff_frequency" value="20" />
+      <param name="diagnostic_period" value="0.25" />
+      <param name="max_loop_frequency" value="105.0" />
+      <param name="min_loop_frequency" value="95.0" />
+      <remap from="setpoint" to="/gimbal_track/setpoint_yaw" />
+      <param name="topic_from_plant" value="/gimbal_track/yaw_state" />
+      <param name="topic_from_controller" value="/gimbal_track/gimbal_control_effort_yaw" />
+     </node>
+
+    <node name="gimbal_track_setpoint" pkg="gimbal_track" type="gimbal_track_setpoint" output="screen">
+      <param name="tag_detection_topic" value="/apriltags/detections" />
+    </node>
+
+</launch>

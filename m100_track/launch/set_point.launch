@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+ <launch>
+    <node name="m100_track_setpoint" pkg="m100_track" type="m100_track_setpoint" output="screen" >
+    <param name="tag_36h11_detection_topic" value="/apriltags/detections" />
+    
+    </node>
+ </launch>
