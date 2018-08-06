@@ -63,11 +63,14 @@ void apriltags36h11Callback(const apriltags::AprilTagDetections::ConstPtr& april
         //最终逼近点相对于相机坐标系的位置
         Eigen::Vector4d position = tag_to_camera_transformation * Eigen::Vector4d(0,0,1,1);
         target_position_incameraframe = position.head(3);
+        std::cout << "target_x_incameraframe = " << target_position_incameraframe(0) << std::endl;
+        std::cout << "target_y_incameraframe = " << target_position_incameraframe(1) << std::endl;
+        std::cout << "target_z_incameraframe = " << target_position_incameraframe(2) << std::endl;
         //标签坐标系相对于相机坐标系的欧拉角
         tag_euler_incameraframe = tag_quaternion_incameraframe.toRotationMatrix().eulerAngles(2, 1, 0);
-        std::cout << "tag_euler_incameraframe around x axis = " << tag_euler_incameraframe[2] / M_PI * 180 << std::endl;
-	    std::cout << "tag_euler_incameraframe around y axis = " << tag_euler_incameraframe[1] / M_PI * 180 << std::endl;
-	    std::cout << "tag_euler_incameraframe around z axis = " << tag_euler_incameraframe[0] / M_PI * 180 << std::endl;
+        //std::cout << "tag_euler_incameraframe around x axis = " << tag_euler_incameraframe[2] / M_PI * 180 << std::endl;
+	    //std::cout << "tag_euler_incameraframe around y axis = " << tag_euler_incameraframe[1] / M_PI * 180 << std::endl;
+	    //std::cout << "tag_euler_incameraframe around z axis = " << tag_euler_incameraframe[0] / M_PI * 180 << std::endl;
         //最终逼近点坐标系相对于目前相机坐标系的欧拉角
         //标签坐标系围绕其X轴转180度极为最终逼近点坐标系的姿态
         Eigen::AngleAxisd tag_to_target_angleaxis = Eigen::AngleAxisd(M_PI, Eigen::Vector3d::UnitX());
@@ -129,6 +132,8 @@ int main(int argc, char **argv)
             setpoint_target_roll_incameraframe_pub.publish(target_roll_incameraframe_msg);
             setpoint_target_pitch_incameraframe_pub.publish(target_pitch_incameraframe_msg);
             setpoint_target_yaw_incameraframe_pub.publish(target_yaw_incameraframe_msg);
+
+            std::cout << "pid target published." << std::endl;
 
         }
         else

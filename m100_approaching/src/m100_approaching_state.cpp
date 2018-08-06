@@ -29,11 +29,11 @@ int main(int argc, char **argv)
     state_yaw_incameraframe_pub = nh.advertise<std_msgs::Float64>("m100_approaching/state_yaw_incameraframe", 10);
 
     ros::Rate loop_rate(200);
-    ros::spinOnce();
+    //ros::spinOnce();
 
     while(ros::ok())
     {
-        ros::spinOnce();
+        //ros::spinOnce();
 
         state_x_incameraframe_msg.data = 0;
         state_y_incameraframe_msg.data = 0;
@@ -48,6 +48,8 @@ int main(int argc, char **argv)
         state_roll_incameraframe_pub.publish(state_roll_incameraframe_msg);
         state_pitch_incameraframe_pub.publish(state_pitch_incameraframe_msg);
         state_yaw_incameraframe_pub.publish(state_yaw_incameraframe_msg);
+
+        std::cout << "pid state published." << std::endl;
 
         loop_rate.sleep();
     }

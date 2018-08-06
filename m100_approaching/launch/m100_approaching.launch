@@ -1,9 +1,15 @@
 <?xml version="1.0"?>
 <launch>
 
-    <node ns = "m100_approaching" name = "m100_approaching_cameraframe_x_velocity_pid_controller" pkg = "pid" type = "controller">
+    <node pkg = "m100_approaching" type = "m100_approaching_setpoint" name = "m100_approaching_setpoint" output = "screen">
+    </node>
+
+    <node pkg = "m100_approaching" type = "m100_approaching_state" name = "m100_approaching_state" output = "screen">
+    </node>
+
+    <node name = "m100_approaching_cameraframe_x_velocity_pid_controller" pkg = "pid" type = "controller">
         <param name = "node_name" value = "cameraframe_x_controller"/>
-        <param name = "Kp" value = "0.5"/>
+        <param name = "Kp" value = "0.25"/>
         <param name = "Ki" value = "0"/>
         <param name = "Kd" value = "0"/>
         <param name = "P" value = "1"/>
@@ -23,9 +29,9 @@
         <param name = "topic_from_controller" value = "/m100_approaching/cameraframe_x_velocity_control_effort"/>
     </node>
 
-    <node ns = "m100_approaching" name = "m100_approaching_cameraframe_y_velocity_pid_controller" pkg = "pid" type = "controller">
+    <node name = "m100_approaching_cameraframe_y_velocity_pid_controller" pkg = "pid" type = "controller">
         <param name = "node_name" value = "cameraframe_y_controller"/>
-        <param name = "Kp" value = "0.5"/>
+        <param name = "Kp" value = "0.25"/>
         <param name = "Ki" value = "0"/>
         <param name = "Kd" value = "0"/>
         <param name = "P" value = "1"/>
@@ -45,9 +51,9 @@
         <param name = "topic_from_controller" value = "/m100_approaching/cameraframe_y_velocity_control_effort"/>
     </node>
 
-    <node ns = "m100_approaching" name = "m100_approaching_cameraframe_z_velocity_pid_controller" pkg = "pid" type = "controller">
+    <node name = "m100_approaching_cameraframe_z_velocity_pid_controller" pkg = "pid" type = "controller">
         <param name = "node_name" value = "cameraframe_z_controller"/>
-        <param name = "Kp" value = "0.5"/>
+        <param name = "Kp" value = "0.2"/>
         <param name = "Ki" value = "0"/>
         <param name = "Kd" value = "0"/>
         <param name = "P" value = "1"/>
@@ -67,9 +73,9 @@
         <param name = "topic_from_controller" value = "/m100_approaching/cameraframe_z_velocity_control_effort"/>
     </node>
 
-    <node ns = "m100_approaching" name = "m100_approaching_cameraframe_roll_velocity_pid_controller" pkg = "pid" type = "controller">
+    <node name = "m100_approaching_cameraframe_roll_velocity_pid_controller" pkg = "pid" type = "controller">
         <param name = "node_name" value = "cameraframe_roll_controller"/>
-        <param name = "Kp" value = "0.5"/>
+        <param name = "Kp" value = "100"/>
         <param name = "Ki" value = "0"/>
         <param name = "Kd" value = "0"/>
         <param name = "P" value = "1"/>
@@ -77,8 +83,8 @@
         <param name = "R" value = "1"/>
         <param name = "/use_sim_time" value = "false"/>
         <param name = "converge_threshold" value = "0.05"/>
-        <param name = "upper_limit" value = "15"/>
-        <param name = "lower_limit" value = "-15"/>
+        <param name = "upper_limit" value = "10000"/>
+        <param name = "lower_limit" value = "-10000"/>
         <param name = "windup_limit" value = "20"/>
         <param name = "cutoff_frequency" value = "20"/>
         <param name = "diagnostic_period" value = "0.25"/>
@@ -89,9 +95,9 @@
         <param name = "topic_from_controller" value = "/m100_approaching/cameraframe_roll_velocity_control_effort"/>
     </node>
 
-    <node ns = "m100_approaching" name = "m100_approaching_cameraframe_pitch_velocity_pid_controller" pkg = "pid" type = "controller">
+    <node name = "m100_approaching_cameraframe_pitch_velocity_pid_controller" pkg = "pid" type = "controller">
         <param name = "node_name" value = "cameraframe_pitch_controller"/>
-        <param name = "Kp" value = "0.5"/>
+        <param name = "Kp" value = "100"/>
         <param name = "Ki" value = "0"/>
         <param name = "Kd" value = "0"/>
         <param name = "P" value = "1"/>
@@ -99,8 +105,8 @@
         <param name = "R" value = "1"/>
         <param name = "/use_sim_time" value = "false"/>
         <param name = "converge_threshold" value = "0.05"/>
-        <param name = "upper_limit" value = "15"/>
-        <param name = "lower_limit" value = "-15"/>
+        <param name = "upper_limit" value = "10000"/>
+        <param name = "lower_limit" value = "-10000"/>
         <param name = "windup_limit" value = "20"/>
         <param name = "cutoff_frequency" value = "20"/>
         <param name = "diagnostic_period" value = "0.25"/>
@@ -111,9 +117,9 @@
         <param name = "topic_from_controller" value = "/m100_approaching/cameraframe_pitch_velocity_control_effort"/>
     </node>
 
-    <node ns = "m100_approaching" name = "m100_approaching_cameraframe_yaw_velocity_pid_controller" pkg = "pid" type = "controller">
+    <node name = "m100_approaching_cameraframe_yaw_velocity_pid_controller" pkg = "pid" type = "controller">
         <param name = "node_name" value = "cameraframe_yaw_controller"/>
-        <param name = "Kp" value = "0.5"/>
+        <param name = "Kp" value = "100"/>
         <param name = "Ki" value = "0"/>
         <param name = "Kd" value = "0"/>
         <param name = "P" value = "1"/>
@@ -121,8 +127,8 @@
         <param name = "R" value = "1"/>
         <param name = "/use_sim_time" value = "false"/>
         <param name = "converge_threshold" value = "0.05"/>
-        <param name = "upper_limit" value = "15"/>
-        <param name = "lower_limit" value = "-15"/>
+        <param name = "upper_limit" value = "10000"/>
+        <param name = "lower_limit" value = "-10000"/>
         <param name = "windup_limit" value = "20"/>
         <param name = "cutoff_frequency" value = "20"/>
         <param name = "diagnostic_period" value = "0.25"/>
@@ -131,6 +137,9 @@
         <remap from = "setpoint" to = "/m100_approaching/setpoint_target_yaw_incameraframe"/>
         <param name = "topic_from_plant" value = "m100_approaching/state_yaw_incameraframe"/>
         <param name = "topic_from_controller" value = "/m100_approaching/cameraframe_yaw_velocity_control_effort"/>
+    </node>
+
+    <node pkg = "m100_approaching" type = "m100_approaching_velocity_controller" name = "m100_approaching_velocity_controller" output = "screen">
     </node>
 
 </launch>
